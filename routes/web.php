@@ -17,3 +17,12 @@ Route::get('/', function () {
 });
 Route::get('/index',"CouponController@index");
 Route::resource('posts', 'Post\PostController');
+Route::get('/lists', 'CouponController@lists');
+Route::get('/curl', 'CouponController@curl');
+
+Route::post('/curl2', 'CouponController@curl2');
+Route::get('/curl2', 'CouponController@curl2');
+
+Route::get('/curl3', 'CouponController@curl3');
+Route::post('/text', 'CouponController@text');
+Route::post('/text', 'CouponController@text');
