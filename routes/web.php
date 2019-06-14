@@ -26,3 +26,12 @@ Route::get('/curl2', 'CouponController@curl2');
 Route::get('/curl3', 'CouponController@curl3');
 Route::post('/text', 'CouponController@text');
 Route::post('/text', 'CouponController@text');
+
+Route::get('/md5', 'CouponController@md5');
+
+Route::get('/pass', 'CouponController@pass');
+
+Route::get('/asymm2', 'CouponController@asymm2');
+
+Route::get('/priv', 'CouponController@priv');
+Route::post('/syntony', 'CouponController@syntony');

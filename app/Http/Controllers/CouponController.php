@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\UserModel;
 use Illuminate\Support\Facades\Redis;
+use GuzzleHttp\Client;
 class CouponController extends Controller
 {
     public function index(){
@@ -39,6 +41,7 @@ class CouponController extends Controller
         $ch=curl_init($url);
 //        设置参数
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
 //        执行一个会话
         $data=curl_exec($ch);
 //        关闭会话
@@ -75,4 +78,103 @@ class CouponController extends Controller
         curl_close($ch);
         print_r($data);
     }
+
+
+    public function md5()
+    {
+        $name = 'qweqwe';
+        $date = base64_encode(serialize($name));
+//        var_dump($date);die;
+        $url = 'http://www.1810blog.com/md5';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);//设为 TRUE ，将在启用 CURLOPT_RETURNTRANSFER 时，返回原生的（Raw）输出
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $date);//数据
+        curl_setopt($ch, CURLOPT_URL, 'http://www.1810blog.com/md5');
+        //3执行会话
+        $info = curl_exec($ch);
+        //4结束会话
+        curl_close($ch);
+//        print_r($info);
+    }
+
+    public function pass(){
+        $str = "wangzitao";
+        $key = 'passpwd';
+        $iv = 'qweqweqweqweqwe1';
+        $cipher = "AES-128-CBC";
+        $env_code = base64_encode(openssl_encrypt($str,$cipher,$key,OPENSSL_RAW_DATA,$iv));
+//        var_dump($env_code);die;
+        $client = new Client();
+        $url = "http://www.1810blog.com/passwork";
+        $response = $client->request('post',$url,[
+           'body' => $env_code
+        ]);
+        echo '<hr>';
+        echo $response->getBody();
+    }
+
+    //非对称加密2
+    public function asymm2(){
+        $data=[
+            'name'=>'王梓韬',
+            'sex'=>'男'
+        ];
+        $data=json_encode($data,JSON_UNESCAPED_UNICODE);
+        //获取私钥
+        $private=openssl_get_privatekey("file://".storage_path('rsa_private_key.pem'));
+        $url="http://www.1810blog.com/asypass";
+        openssl_private_encrypt($data,$crypted,$private);
+        var_dump($crypted);
+        echo '<hr>';
+        $crypted=base64_encode($crypted);
+
+        //使用Guzzle传值
+        $clinet = new Client();
+        $response = $clinet ->request("POST",$url,[
+            'body'=>$crypted
+        ]);
+        echo $response->getBody();
+    }
+
+//    练习
+    public  function priv(){
+        $data="活人禁忌";
+        $key="password";
+        $method="AES-128-CBC";//密码学方式
+        $iv="adminadminadmin1";//非 NULL 的初始化向量
+        $a=openssl_get_privatekey("file://".storage_path('rsa_private_key.pem')); //获取秘钥
+        openssl_sign($data,$exer,$a);//生成签名
+        $url="http://www.1810blog.com/exerci?url=".urlencode($exer);//签名拼接到路由  发送到服务端
+        $app=openssl_encrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);// 对称加密
+        $clinet= new Client();//实例化 Guzzle
+//        Guzzle 发送
+        $response=$clinet->request("POST",$url,[
+            'body'=>$app
+        ]);
+        echo $response->getBody();
+    }
+
+    public function syntony()
+    {
+        $key="passwords";
+        $method="AES-128-CBC";//密码学方式
+        $iv="1212121212121212";//非 NULL 的初始化向量
+        $re=$_GET['url']; //路由拼接的数据
+        $data=file_get_contents('php://input');
+        $data_post=openssl_decrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
+        echo "传过来的值".$data_post;
+        $asymm=openssl_pkey_get_public("file://".storage_path('rsa_public_key.pem'));//从证书中解析公钥，以供使用
+        dump($asymm);
+        $result = openssl_verify($data_post,$re,$asymm);//验证签名
+        echo "签名验证".$result;
+    }
+
+    public function aliyun(){
+        $data = [
+
+        ];
+    }
+
 }
