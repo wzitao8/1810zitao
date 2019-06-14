@@ -35,3 +35,7 @@ Route::get('/asymm2', 'CouponController@asymm2');
 
 Route::get('/priv', 'CouponController@priv');
 Route::post('/syntony', 'CouponController@syntony');
+
+//支付
+Route::get('/aliyun', 'CouponController@aliyun');
+Route::get('/coupon/pay', 'CouponController@pay');

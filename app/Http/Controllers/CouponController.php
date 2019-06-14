@@ -172,9 +172,10 @@ class CouponController extends Controller
     }
 
     public function aliyun(){
-        $data = [   
-
-        ];
+        return view('/pay/alipay');
     }
 
+    public function pay(){
+        echo'123';
+    }
 }
