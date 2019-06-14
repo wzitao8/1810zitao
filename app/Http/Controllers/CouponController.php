@@ -172,7 +172,7 @@ class CouponController extends Controller
     }
 
     public function aliyun(){
-        $data = [
+        $data = [   
 
         ];
     }
