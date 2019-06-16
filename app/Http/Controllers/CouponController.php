@@ -180,7 +180,7 @@ class CouponController extends Controller
      */
     public function pay()
     {
-        $appid = '2016092500593666';
+        $appid = '2016092500595564';
         $ali_gateway = 'https://openapi.alipaydev.com/gateway.do';
         //请求参数;
         $biz_cont = [
@@ -192,7 +192,7 @@ class CouponController extends Controller
         //公共参数
         $data = [
             'app_id'    => $appid,
-            'method'    => 'alipay.trade.wap.pay',
+            'method'    => 'alipay.trade.app.pay',
             'charset'   => 'utf-8',
             'sign_type' => 'RSA2',
             'timestamp' => date('Y-m-d H:i:s'),
@@ -208,7 +208,7 @@ class CouponController extends Controller
         }
         $str = rtrim($str0,'&');
         // 3 私钥签名
-        $priv = openssl_get_privatekey("file://".storage_path('rsa_private_key.pem'));;
+        $priv = openssl_get_privatekey("file://".storage_path('priva.pem'));;
         openssl_sign($str,$signature,$priv,OPENSSL_ALGO_SHA256);
         $data['sign'] = base64_encode($signature);
         // 4 urlencode
