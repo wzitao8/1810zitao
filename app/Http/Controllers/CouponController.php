@@ -218,7 +218,9 @@ class CouponController extends Controller
         }
         $param = rtrim($param_str,'&');
         $url = $ali_gateway . $param;
+//        echo $url;die;
         //发送GET请求
         header("Location:".$url);
     }
+
 }

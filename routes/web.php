@@ -39,3 +39,6 @@ Route::post('/syntony', 'CouponController@syntony');
 //支付
 Route::get('/aliyun', 'CouponController@aliyun');
 Route::get('/coupon/pay', 'CouponController@pay');
+
+//注册
+Route::post('/reg', 'RegController@reg');
