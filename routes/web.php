@@ -43,3 +43,9 @@ Route::get('/coupon/pay', 'CouponController@pay');
 //注册
 Route::post('/reg', 'RegController@reg');
 Route::get('/reg', 'RegController@reg');
+
+//登陆
+Route::post('/login', 'RegController@login');
+Route::get('/login', 'RegController@login');
+//登陆跳转
+Route::get('/locat', 'RegController@locat');
