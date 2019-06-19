@@ -56,3 +56,7 @@ Route::get('/server', 'RegController@server');
 
 Route::get('/send', 'RegController@send');
 Route::post('/send', 'RegController@send');
+
+
+
+Route::get('/reg/passwork', 'RegController@passwork');

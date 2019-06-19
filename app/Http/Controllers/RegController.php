@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
+use Mail;
 class RegController extends Controller
 {
     public function reg(Request $request){
@@ -117,25 +118,28 @@ class RegController extends Controller
     }
     public function send(Request $request){
 
-        $email = $request ->input('email');
-        $u = RegModel::where(['email'=>$email])->first();
-        if($u){
-            echo $email;die;
-            $code=rand(1111,9999);
-            Mail::send('user/forgetPassword',['code'=>$code,'name'=>$email],function($message)use($email){
-                $message->subject('找回密码');
-                $message->to($email);
-            });
-            //echo $code;
-            return $code;
-        }else{
-            $respoer = [
-                'error' =>50007,
-                'msg' =>'获取不到邮箱',
-            ];
-            return $respoer;
-        }
+//        $email = $request ->input('email');
+        $email = "994754467@qq.com";
+        $code=rand(1111,9999);
+        Mail::send('reg/Password',['code'=>$code,'name'=>$email],function($message)use($email){
+            $message->subject('找回密码');
+            $message->to($email);
+        });
+        //echo $code;
+        return $code;
+//        $u = RegModel::where(['email'=>$email])->first();
+//        if($u){
+//           // echo $email;die;
+//
+//        }else{
+//            $respoer = [
+//                'error' =>50007,
+//                'msg' =>'获取不到邮箱',
+//            ];
+//            return $respoer;
+//        }
 //
     }
+
 
 }
