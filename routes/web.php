@@ -49,3 +49,10 @@ Route::post('/login', 'RegController@login');
 Route::get('/login', 'RegController@login');
 //登陆跳转
 Route::get('/locat', 'RegController@locat');
+
+
+Route::post('/server', 'RegController@server');
+Route::get('/server', 'RegController@server');
+
+Route::get('/send', 'RegController@send');
+Route::post('/send', 'RegController@send');
