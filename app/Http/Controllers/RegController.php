@@ -55,7 +55,7 @@ class RegController extends Controller
 //                echo $redis_key;
                 Redis::set($redis_key,$token);
                 Redis::setTimeout($redis_key,10);
-//                echo __LINE__;die;
+
                  $respoer = [
                     'error' =>0,
                      'msg' =>'ok',

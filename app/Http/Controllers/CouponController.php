@@ -223,4 +223,11 @@ class CouponController extends Controller
         header("Location:".$url);
     }
 
+    public function logindo(){
+//        echo '123';
+        return view('admin.login');
+    }
+
+
+
 }

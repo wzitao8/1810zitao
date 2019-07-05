@@ -60,3 +60,7 @@ Route::post('/send', 'RegController@send');
 
 
 Route::get('/reg/passwork', 'RegController@passwork');
+
+
+
+Route::get('/logindo', 'CouponController@logindo');
