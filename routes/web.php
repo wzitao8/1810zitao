@@ -64,3 +64,6 @@ Route::get('/reg/passwork', 'RegController@passwork');
 
 
 Route::get('/logindo', 'CouponController@logindo');
+
+
+Route::get('/key/b', 'KeyController@b');

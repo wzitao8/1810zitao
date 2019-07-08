@@ -44,7 +44,7 @@ class CouponController extends Controller
 
 //        执行一个会话
         $data=curl_exec($ch);
-//        关闭会话
+//        关闭会话0
         curl_close($ch);
         return $data;
     }
