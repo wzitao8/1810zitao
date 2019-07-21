@@ -44,6 +44,8 @@ Route::get('/coupon/pay', 'CouponController@pay');
 Route::post('/reg', 'RegController@reg');
 Route::get('/reg', 'RegController@reg');
 
+Route::post('/regs', 'RegController@regs');
+
 //登陆
 Route::post('/login', 'RegController@login');
 Route::get('/login', 'RegController@login');
@@ -67,3 +69,10 @@ Route::get('/logindo', 'CouponController@logindo');
 
 
 Route::get('/key/b', 'KeyController@b');
+//登陆
+Route::get('/user/login', 'ApiController@login');
+Route::post('/user/loginDo', 'ApiController@loginDo');
+
+Route::get('/user/list', 'ApiController@list');
+
+Route::get('/api/ppp/{id}', 'ApiController@ppp');

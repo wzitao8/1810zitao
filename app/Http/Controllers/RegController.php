@@ -37,19 +37,23 @@ class RegController extends Controller
         }
     }
 
+
+	public function regs(Request $request){
+		echo'213';
+	}
     public function login(Request $request){
 //        header("Access-Control-Allow-Origin:*");
 //        echo '123';
         $name = $request->input('name');
         $pwd = $request->input('pwd');
-
-//        dd($post);
+		
+       // dd($name);
         $a = RegModel::where(['username'=>$name])->first();
 //        dd($a);
         if($a){
             if(password_verify($pwd,$a->pwd)){
 //                echo 'ok';
-                $token = substr(md5($a->id.Str::random(8).mt_rand(11,99999)),10,10);
+                $token = substr(md5($a->id.Str::random(8).mt_rand(11,99999)),10,20);
 //                var_dump($token);
                 $redis_key = 'u:token:'.$a->id.'';
 //                echo $redis_key;
