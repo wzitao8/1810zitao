@@ -76,3 +76,9 @@ Route::post('/user/loginDo', 'ApiController@loginDo');
 Route::get('/user/list', 'ApiController@list');
 
 Route::get('/api/ppp/{id}', 'ApiController@ppp');
+
+Route::post('/lolqwe', 'ApiController@lol');
+
+
+
+

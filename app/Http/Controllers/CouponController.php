@@ -208,7 +208,7 @@ class CouponController extends Controller
         }
         $str = rtrim($str0,'&');
         // 3 私钥签名
-        $priv = openssl_get_privatekey("file://".storage_path('priva.pem'));;
+        $priv = openssl_get_privatekey("file://".storage_path('priva.pem'));
         openssl_sign($str,$signature,$priv,OPENSSL_ALGO_SHA256);
         $data['sign'] = base64_encode($signature);
         // 4 urlencode
@@ -227,7 +227,5 @@ class CouponController extends Controller
 //        echo '123';
         return view('admin.login');
     }
-
-
 
 }
